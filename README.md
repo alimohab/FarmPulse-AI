@@ -215,6 +215,3 @@ The values above are examples, not model results.
 - Extend to multiple farms and more automated cow identification.
 - Improve the dashboard toward production quality.
 
-## Repository status
-
-This README describes the proposed design and work plan. Tasks are checked off only after code, data documentation, and evaluation results are added to the repository. Architecture examples and sample values above are illustrative, not reported model results.
