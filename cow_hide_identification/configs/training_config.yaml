@@ -1,0 +1,55 @@
+# Cow hide-pattern identification: training configuration.
+# Relative paths are resolved from the project root (the folder containing this configs/ folder).
+
+seed: 42
+
+paths:
+  dataset_dir: data/raw            # Cow_XXX/<view>/[<session>/]*.jpg  (use data/processed for detector crops)
+  splits_dir: data/splits          # train.csv / val.csv / test.csv are written here
+  checkpoint_dir: models/checkpoints
+  output_dir: outputs              # logs, training history, evaluation results
+
+data:
+  views: [left, right, top]
+  image_extensions: [.jpg, .jpeg, .png, .bmp, .webp]
+  image_size: [224, 224]           # [height, width]; elongated side views may benefit from e.g. [224, 448]
+  split_ratios: {train: 0.7, val: 0.15, test: 0.15}
+  # Splits keep whole recording sessions together when sessions are known. Sessions come from a
+  # sub-folder inside the view folder (Cow_001/left/2024-10-15/*.jpg) or from an optional CSV with
+  # columns `image,session` (image path relative to dataset_dir, e.g. Cow_001/left/img_001.jpg).
+  session_metadata: null
+  min_sessions_for_grouping: 3     # cows with fewer known sessions fall back to image-level splitting
+  num_workers: 2                   # DataLoader worker processes (0 = load in the main process)
+
+model:
+  backbone: resnet50               # resnet18 | resnet34 | resnet50 | resnet101 | efficientnet_b0 | efficientnet_b2
+  pretrained: true                 # ImageNet weights (transfer learning); downloaded on first use
+  embedding_dim: 128
+  hidden_dim: 512                  # hidden layer of the embedding head (0 = single linear layer)
+  dropout: 0.2
+
+training:
+  epochs: 50
+  batch_size: 32                   # = P cow/view groups x K images per group
+  samples_per_class: 4             # K, must be >= 2 so every batch contains positive pairs
+  batches_per_epoch: null          # null = ceil(train images / batch_size)
+  learning_rate: 3.0e-4            # embedding head learning rate
+  backbone_lr_multiplier: 0.1      # backbone learns 10x slower to preserve pretrained features
+  weight_decay: 1.0e-4
+  freeze_backbone_epochs: 2        # train only the head for the first N epochs
+  margin: 0.2                      # triplet margin, in cosine distance (1 - cosine similarity)
+  cross_view_positives: false      # false: positives share cow AND view; true: any view of the same cow
+  scheduler: cosine                # cosine | none
+  amp: true                        # mixed precision; only active on CUDA
+  device: auto                     # auto | cpu | cuda | cuda:0
+  monitor: top1                    # metric that decides best_model.pth: top1 | mAP | recall@K | val_loss
+  early_stopping:
+    enabled: true
+    patience: 10                   # epochs without improvement of `monitor`
+    min_delta: 0.001
+  log_every: 10                    # log every N training batches (0 = only per epoch)
+  resume: false                    # true = continue from models/checkpoints/last_checkpoint.pth
+
+evaluation:
+  recall_k: [1, 5, 10]
+  same_view_retrieval: true        # only match queries against gallery images of the same view

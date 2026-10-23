@@ -1,0 +1,13 @@
+# Core dependencies. pip installs the CPU build of PyTorch by default;
+# see README.md for installing the CUDA build on Windows.
+torch>=2.3
+torchvision>=0.18
+numpy>=1.24
+Pillow>=10.0
+PyYAML>=6.0
+
+# Tests
+pytest>=7.0
+
+# Optional: only needed for scripts/crop_cows.py and `compare_images.py --detect`
+# ultralytics>=8.3
