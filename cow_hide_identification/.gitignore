@@ -1,0 +1,10 @@
+# Dataset images and generated artefacts stay out of git (split CSVs in data/splits are kept).
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+outputs/
+__pycache__/
+.pytest_cache/

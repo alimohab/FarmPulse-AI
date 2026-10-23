@@ -6,9 +6,9 @@ import os
 # Configuration
 # ==============================
 
-VIDEO_PATH = r"C:\Users\YourName\Videos\your_video.mp4"
+VIDEO_PATH = r"C:\Users\Lenovo\FarmPulse-AI-1\hiv00007.mp4"
 OUTPUT_FOLDER = "training_frames"
-FRAME_INTERVAL = 60  # Extract one frame every 60 frames
+FRAME_INTERVAL = 120  # Extract one frame every 120 frames
 
 
 def extract_frames(video_path, output_folder, frame_interval):
