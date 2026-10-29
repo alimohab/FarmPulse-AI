@@ -30,7 +30,7 @@ from torch.utils.data import DataLoader, Dataset, Sampler
 logger = logging.getLogger(__name__)
 
 DEFAULT_VIEWS: Tuple[str, ...] = ("left", "right", "top")
-DEFAULT_EXTENSIONS: Tuple[str, ...] = (".jpg", ".jpeg", ".png", ".bmp", ".webp")
+DEFAULT_EXTENSIONS: Tuple[str, ...] = (".jpg", ".jpeg", ".png", ".bmp", ".webp","HEIC")
 
 
 class DatasetValidationError(ValueError):
