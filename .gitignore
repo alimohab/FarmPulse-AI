@@ -1,0 +1,151 @@
+# =====================================================================================
+# NO DATA IN GIT. Images, videos, archives, datasets, model weights and embeddings must
+# never be committed from this folder. Share them through the team drive instead.
+# Patterns use [xX] brackets so they also match upper-case extensions (.JPG, .MP4, ...)
+# on Linux/macOS, where git is case-sensitive.
+# =====================================================================================
+
+# ---- Data folders: everything inside is ignored, only the .gitkeep placeholders stay ----
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/splits/*
+!data/splits/.gitkeep
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+outputs/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+
+# ---- Images ----
+*.[jJ][pP][gG]
+*.[jJ][pP][eE][gG]
+*.[jJ][pP][eE]
+*.[jJ][fF][iI][fF]
+*.[pP][nN][gG]
+*.[gG][iI][fF]
+*.[bB][mM][pP]
+*.[tT][iI][fF]
+*.[tT][iI][fF][fF]
+*.[wW][eE][bB][pP]
+*.[hH][eE][iI][cC]
+*.[hH][eE][iI][fF]
+*.[aA][vV][iI][fF]
+*.[iI][cC][oO]
+*.[sS][vV][gG]
+*.[pP][sS][dD]
+*.[rR][aA][wW]
+*.[cC][rR]2
+*.[nN][eE][fF]
+*.[aA][rR][wW]
+*.[dD][nN][gG]
+*.[pP][pP][mM]
+*.[pP][gG][mM]
+*.[eE][xX][rR]
+
+# ---- Videos ----
+*.[mM][pP]4
+*.[mM]4[vV]
+*.[aA][vV][iI]
+*.[mM][oO][vV]
+*.[mM][kK][vV]
+*.[wW][mM][vV]
+*.[fF][lL][vV]
+*.[wW][eE][bB][mM]
+*.[mM][pP][gG]
+*.[mM][pP][eE][gG]
+*.3[gG][pP]
+*.[mM][tT][sS]
+*.[mM]2[tT][sS]
+*.[vV][oO][bB]
+*.[hH]264
+*.[hH]265
+*.[dD][aA][vV]
+
+# ---- Audio ----
+*.[mM][pP]3
+*.[wW][aA][vV]
+*.[fF][lL][aA][cC]
+*.[aA][aA][cC]
+*.[oO][gG][gG]
+*.[mM]4[aA]
+
+# ---- Archives / compressed (data often hides in these) ----
+*.[zZ][iI][pP]
+*.[rR][aA][rR]
+*.7[zZ]
+*.[tT][aA][rR]
+*.[gG][zZ]
+*.[tT][gG][zZ]
+*.[bB][zZ]2
+*.[xX][zZ]
+*.[zZ][sS][tT]
+*.[lL][zZ]4
+*.[iI][sS][oO]
+*.[cC][aA][bB]
+*.[zZ][0-9][0-9]
+*.[rR][0-9][0-9]
+*.[0-9][0-9][0-9]
+
+# ---- Tabular / dataset / annotation files ----
+*.[cC][sS][vV]
+*.[tT][sS][vV]
+*.[xX][lL][sS]
+*.[xX][lL][sS][xX]
+*.[pP][aA][rR][qQ][uU][eE][tT]
+*.[fF][eE][aA][tT][hH][eE][rR]
+*.[aA][rR][rR][oO][wW]
+*.[hH]5
+*.[hH][dD][fF]5
+*.[tT][fF][rR][eE][cC][oO][rR][dD]
+*.[lL][mM][dD][bB]
+*.[mM][dD][bB]
+*.[dD][bB]
+*.[sS][qQ][lL][iI][tT][eE]
+*.[sS][qQ][lL][iI][tT][eE]3
+*.[jJ][sS][oO][nN][lL]
+*.[nN][dD][jJ][sS][oO][nN]
+*.[mM][aA][tT]
+*.[nN][iI][iI]
+*.[dD][cC][mM]
+
+# ---- Arrays, embeddings, pickles (galleries, cached features) ----
+*.[nN][pP][yY]
+*.[nN][pP][zZ]
+*.[pP][kK][lL]
+*.[pP][iI][cC][kK][lL][eE]
+*.[jJ][oO][bB][lL][iI][bB]
+*.[fF][aA][iI][sS][sS]
+*.[iI][nN][dD][eE][xX]
+
+# ---- Model weights / checkpoints ----
+*.[pP][tT]
+*.[pP][tT][hH]
+*.[cC][kK][pP][tT]
+*.[sS][aA][fF][eE][tT][eE][nN][sS][oO][rR][sS]
+*.[oO][nN][nN][xX]
+*.[eE][nN][gG][iI][nN][eE]
+*.[tT][fF][lL][iI][tT][eE]
+*.[pP][bB]
+*.[mM][lL][mM][oO][dD][eE][lL]
+*.[bB][iI][nN]
+*.[wW][eE][iI][gG][hH][tT][sS]
+
+# ---- Documents that may contain data/images ----
+*.[pP][dD][fF]
+*.[dD][oO][cC]
+*.[dD][oO][cC][xX]
+*.[pP][pP][tT]
+*.[pP][pP][tT][xX]
+
+# ---- Python / tooling caches ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
