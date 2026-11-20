@@ -34,6 +34,14 @@ class CowBox:
         return max(0.0, self.x2 - self.x1) * max(0.0, self.y2 - self.y1)
 
 
+def crop_box(image: Image.Image, box: CowBox, padding: float = 0.05) -> Image.Image:
+    """Crop ``box`` from ``image``, enlarged by ``padding`` (fraction of the box size) and clipped to the image."""
+    pad_x, pad_y = (box.x2 - box.x1) * padding, (box.y2 - box.y1) * padding
+    w, h = image.size
+    return image.crop((max(0, int(box.x1 - pad_x)), max(0, int(box.y1 - pad_y)),
+                       min(w, int(box.x2 + pad_x)), min(h, int(box.y2 + pad_y))))
+
+
 class CowCropper:
     """Detects cows (COCO class 'cow' or a custom cattle model) and crops them."""
 
@@ -66,11 +74,7 @@ class CowCropper:
         boxes = self.detect(image)
         if not boxes:
             return None
-        box = max(boxes, key=lambda b: b.area)
-        pad_x, pad_y = (box.x2 - box.x1) * self.padding, (box.y2 - box.y1) * self.padding
-        w, h = image.size
-        return image.crop((max(0, int(box.x1 - pad_x)), max(0, int(box.y1 - pad_y)),
-                           min(w, int(box.x2 + pad_x)), min(h, int(box.y2 + pad_y))))
+        return crop_box(image, max(boxes, key=lambda b: b.area), self.padding)
 
 
 def crop_dataset(source_dir: Union[str, Path], target_dir: Union[str, Path], cropper: CowCropper,

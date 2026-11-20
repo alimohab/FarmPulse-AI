@@ -25,7 +25,7 @@ cow_hide_identification/
 ├── data/splits/                      train.csv / val.csv / test.csv (generated, reproducible)
 ├── models/checkpoints/               best_model.pth, last_checkpoint.pth
 ├── outputs/                          train.log, training_history.csv, evaluation_*.json
-├── scripts/                          train_model.py, evaluate_model.py, compare_images.py, crop_cows.py
+├── scripts/                          train_model.py, evaluate_model.py, compare_images.py, crop_cows.py, pick_cows.py
 ├── src/cowid/                        the library (data, detection, reid, training, utils)
 └── tests/                            pytest tests
 ```
@@ -169,6 +169,40 @@ python scripts\crop_cows.py --model ..\cow-detection\models\yolo11m.pt   # or yo
 
 This mirrors `data\raw` into `data\processed`. Review the crops, because the largest cow is not
 always the labelled one. Then set `paths.dataset_dir: data/processed` and train with `--resplit`.
+
+### Photos with several cows: pick the right one
+
+`crop_cows.py` keeps the largest cow, which is often the wrong one in group photos. Use
+`pick_cows.py` instead:
+
+```powershell
+python scripts\pick_cows.py
+```
+
+- **Automatic picks:** photos with exactly one detected cow are cropped automatically.
+- **Your picks:** every other photo opens in a window with numbered boxes, and the title says
+  which cow to find.
+  - Press the box number or click the box.
+  - **d**: draw the box yourself.
+  - **s**: skip the photo.
+  - **b**: go back to the previous photo.
+  - **q**: quit.
+- **Photos filed under several cows** (`data\excluded_multi_cow\`) are shown once per cow, so each
+  cow gets its own crop. A box already given to another cow shows that cow's name.
+- **Saving and resuming:** every choice is saved straight away to `data\crop_selections.csv`.
+  Run the same command again to continue where you stopped. Detections are cached in
+  `outputs\crop_detections.json`, so later runs start straight away.
+- **Output:** crops are written to `data\processed\<cow>\<view>\`. Changing a choice later updates
+  its crop.
+
+| Option | What it does |
+|--------|--------------|
+| `--review-all` | also check the automatic single-cow picks |
+| `--export-only` | rewrite the crops from the CSV without detecting again |
+| `--no-gui` | detect and auto-pick only, without opening a window |
+
+When every photo has a choice, set `paths.dataset_dir: data/processed` in the config and run
+`python scripts\train_model.py --resplit`.
 
 ## Configuration highlights (`configs/training_config.yaml`)
 
