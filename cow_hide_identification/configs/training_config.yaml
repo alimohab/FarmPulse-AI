@@ -4,7 +4,7 @@
 seed: 42
 
 paths:
-  dataset_dir: data/raw            # Cow_XXX/<view>/[<session>/]*.jpg  (use data/processed for detector crops)
+  dataset_dir: data/processed      # Cow_XXX/<view>/[<session>/]*.jpg  (cow crops from scripts/pick_cows.py; data/raw = full photos)
   splits_dir: data/splits          # train.csv / val.csv / test.csv are written here
   checkpoint_dir: models/checkpoints
   output_dir: outputs              # logs, training history, evaluation results
