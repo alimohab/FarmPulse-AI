@@ -1,6 +1,6 @@
 # FarmPulse AI vision demo (mockup video)
 
-`farmpulse_demo.mp4` (40 s, 1080p): cow detection plus standing / eating / drinking, on the project's own footage.
+`farmpulse_demo_long.mp4` (1 min 46 s, 1080p): cow detection plus standing / eating / drinking on the project's own footage, with a "how it works" card, a live caption panel, a dwell timer (CHECKING) and short freeze-frame explainers for talking through each step.
 
 ## How it is made
 
@@ -20,7 +20,7 @@ Lying is not shown (the demo footage has no usable lying cows and no posture mod
 cd cow-detection && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && cd ../demo
 ../cow-detection/.venv/bin/python run_detection.py     # real detection + tracking -> work/*.json
 ../cow-detection/.venv/bin/python make_demo.py analyse  # behaviours
-../cow-detection/.venv/bin/python make_demo.py render   # -> farmpulse_demo.mp4
+../cow-detection/.venv/bin/python make_demo.py render   # -> farmpulse_demo_long.mp4
 ```
 
-Scenes (clip, start, length, zones) are defined in `scenes.py`.
+Scenes (clip, start, length, zones, which explainer pauses to add) are defined in `scenes.py`.
